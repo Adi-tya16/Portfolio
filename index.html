@@ -85,6 +85,36 @@
             opacity: 0.8;
             transition: all 0.3s ease-out;
         }
+
+        /* Back to Top Button Styling */
+        #back-to-top-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+            z-index: 100;
+        }
+        #back-to-top-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        #back-to-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
 <body class="bg-slate-950">
@@ -290,9 +320,14 @@
     <!-- Footer -->
     <footer class="bg-black/50 py-6 z-10 relative">
         <div class="container mx-auto px-6 text-center text-gray-400">
-            <p>&copy; 2024 Aditya Sharma. All rights reserved.</p>
+            <p>&copy; 2025 Aditya Sharma. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <a id="back-to-top-btn" href="#home">
+        <i data-lucide="arrow-up"></i>
+    </a>
 
     <script>
         // Initialize Lucide icons
@@ -366,7 +401,27 @@
             });
         });
 
+        // --- Back to Top Button Logic (NEW) ---
+        const backToTopBtn = document.getElementById('back-to-top-btn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
     </script>
 
 </body>
 </html>
+
